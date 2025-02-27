@@ -1,3 +1,5 @@
+const notes= require('./notes.js')
+const fs= require('fs')
 //const validator=require('validator')
 //const chalk= require('chalk')
 const yargs= require('yargs')
@@ -24,22 +26,28 @@ yargs.version("1.1.0")
             describe: 'the body of the note',
             demandOption: true,
             type: 'string'
+        },
+        tail:{
+            describe: 'the tail of the note',
+            demandOption: false,
+            type: 'string'
         }
     },
     handler: function (argv) {
-        console.log('Title:',argv.title)
+        notes.addNote(argv.title, argv.body, argv.tail);
     }
 
 })
 
 
 yargs.command({
-    command:'removing a note',
+    command:'remove',
     describe: 'alll gone',
     handler: function (){
         console.log('remove')
     }
 })
+
 
 yargs.command ({
     command: 'read',
